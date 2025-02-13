@@ -35,7 +35,7 @@ dependencies:
   dio: ^5.0.1
   flutter:
     sdk: flutter
-  flutter_mailer: ^2.0.0
+  flutter_mailer: ^3.0.0
   fluttertoast: ^8.2.6
   logging: ^1.0.2
   mailer: ^6.0.0

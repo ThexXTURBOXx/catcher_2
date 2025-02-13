@@ -1,3 +1,6 @@
+## 2.1.1
+* Update `flutter_mailer` to `3.x`
+
 ## 2.1.0
 * Add `extraData` parameter to `reportCheckedError` ([#40](https://github.com/ThexXTURBOXx/catcher_2/issues/40))
 

@@ -1,3 +1,6 @@
+## 2.1.2
+* Allow `sentry` versions `9.x`
+
 ## 2.1.1
 * Update `flutter_mailer` to `3.x`
 

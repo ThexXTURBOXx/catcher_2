@@ -23,7 +23,7 @@ It supports Android, iOS, Web, Linux, Windows and MacOS platforms.
 Add this line to your **pubspec.yaml**:
 ```yaml
 dependencies:
-  catcher_2: ^2.0.0-alpha.0
+  catcher_2: ^2.0.0
 ```
 
 Then run this command:

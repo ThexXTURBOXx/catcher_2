@@ -105,6 +105,9 @@ class Catcher2 implements ReportModeAction {
     }
   }
 
+  void configureNavigatorKey(GlobalKey<NavigatorState>? navigatorKey) =>
+      _configureNavigatorKey(navigatorKey);
+
   void _configureNavigatorKey(GlobalKey<NavigatorState>? navigatorKey) {
     if (navigatorKey != null) {
       _navigatorKey = navigatorKey;

@@ -1,3 +1,6 @@
+## 2.1.3
+* Allow better integration of `go_router`/`MaterialApp.router(...)` (Thanks to [@IVLIVS-III](https://github.com/IVLIVS-III) in [#48](https://github.com/ThexXTURBOXx/catcher_2/pull/48))
+
 ## 2.1.2
 * Allow `sentry` versions `9.x`
 

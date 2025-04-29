@@ -38,7 +38,9 @@ class Catcher2 implements ReportModeAction {
   }
 
   static late Catcher2 _instance;
-  static GlobalKey<NavigatorState>? _navigatorKey;
+
+  /// Instance of navigator key
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Root widget that is run using [runApp], see also [runAppFunction] if you
   /// want to customise how the widget is run
@@ -74,12 +76,12 @@ class Catcher2 implements ReportModeAction {
   final Map<DateTime, String> _reportsOccurrenceMap = {};
   LocalizationOptions? _localizationOptions;
 
-  /// Instance of navigator key
-  static GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
-
   void _configure(GlobalKey<NavigatorState>? navigatorKey) {
     _instance = this;
-    _configureNavigatorKey(navigatorKey);
+    if (navigatorKey != null) {
+      Catcher2.navigatorKey = navigatorKey;
+    }
+
     _setupCurrentConfig();
     _setupLogger();
     _configureLogger();
@@ -102,14 +104,6 @@ class Catcher2 implements ReportModeAction {
       );
     } else {
       _logger.fine('Catcher 2 configured successfully.');
-    }
-  }
-
-  void _configureNavigatorKey(GlobalKey<NavigatorState>? navigatorKey) {
-    if (navigatorKey != null) {
-      _navigatorKey = navigatorKey;
-    } else {
-      _navigatorKey = GlobalKey<NavigatorState>();
     }
   }
 
@@ -710,9 +704,9 @@ class Catcher2 implements ReportModeAction {
     _cachedReports.remove(report);
   }
 
-  BuildContext? _getContext() => navigatorKey?.currentState?.overlay?.context;
+  BuildContext? _getContext() => navigatorKey.currentState?.overlay?.context;
 
-  bool _isContextValid() => navigatorKey?.currentState?.overlay != null;
+  bool _isContextValid() => navigatorKey.currentState?.overlay != null;
 
   /// Get currently used config.
   Catcher2Options? getCurrentConfig() => _currentConfig;

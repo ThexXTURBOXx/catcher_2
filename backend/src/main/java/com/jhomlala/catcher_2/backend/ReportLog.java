@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 public class ReportLog {
 	private String error;
 	private String stackTrace;
-	private Map<String,String> deviceParameters;
+	private Map<String,Object> deviceParameters;
 	private Map<String,String> applicationParameters;
 	private Map<String,String> customParameters;
 	private Timestamp dateTime;
@@ -23,10 +23,10 @@ public class ReportLog {
 	public void setStackTrace(String stackTrace) {
 		this.stackTrace = stackTrace;
 	}
-	public Map<String, String> getDeviceParameters() {
+	public Map<String, Object> getDeviceParameters() {
 		return deviceParameters;
 	}
-	public void setDeviceParameters(Map<String, String> deviceParameters) {
+	public void setDeviceParameters(Map<String, Object> deviceParameters) {
 		this.deviceParameters = deviceParameters;
 	}
 	public Map<String, String> getApplicationParameters() {
@@ -61,7 +61,7 @@ public class ReportLog {
 	
 	public String getDeviceDataFormatted() {
 		String text = "<small>";
-		for (Entry<String, String> entry: deviceParameters.entrySet()) {
+		for (Entry<String, Object> entry: deviceParameters.entrySet()) {
 			text += "<b>"+entry.getKey()+"</b>:"+entry.getValue() +"<br>";
 		}
 		text += "</small>";

@@ -84,7 +84,8 @@ abstract class BaseEmailHandler extends ReportHandler {
   }
 
   /// Escape html value from [value].
-  String _escapeHtmlValue(value) => _htmlEscape.convert(value.toString());
+  String _escapeHtmlValue(dynamic value) =>
+      _htmlEscape.convert(value.toString());
 
   /// Setup raw text email message from [report].
   String setupRawMessageText(Report report) {

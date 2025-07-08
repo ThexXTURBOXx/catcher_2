@@ -504,20 +504,18 @@ class Catcher2 implements ReportModeAction {
   /// Report checked error (error caught in try-catch block). Catcher 2 will
   /// treat this as normal exception and pass it to handlers.
   static void reportCheckedError(
-    error,
-    stackTrace, {
+    dynamic error,
+    dynamic stackTrace, {
     Map<String, dynamic>? extraData,
   }) {
-    dynamic errorValue = error;
-    dynamic stackTraceValue = stackTrace;
-    errorValue ??= 'undefined error';
-    stackTraceValue ??= StackTrace.current;
-    _instance._reportError(errorValue, stackTraceValue, extraData: extraData);
+    error ??= 'undefined error';
+    stackTrace ??= StackTrace.current;
+    _instance._reportError(error, stackTrace, extraData: extraData);
   }
 
   Future<void> _reportError(
-    error,
-    stackTrace, {
+    dynamic error,
+    dynamic stackTrace, {
     FlutterErrorDetails? errorDetails,
     Map<String, dynamic>? extraData,
   }) async {
@@ -605,7 +603,7 @@ class Catcher2 implements ReportModeAction {
   bool isReportModeSupportedInPlatform(Report report, ReportMode reportMode) =>
       reportMode.getSupportedPlatforms().contains(report.platformType);
 
-  ReportMode? _getReportModeFromExplicitExceptionReportModeMap(error) {
+  ReportMode? _getReportModeFromExplicitExceptionReportModeMap(dynamic error) {
     final errorName = error != null ? error.toString().toLowerCase() : '';
     ReportMode? reportMode;
     _currentConfig.explicitExceptionReportModesMap.forEach((key, value) {
@@ -618,7 +616,7 @@ class Catcher2 implements ReportModeAction {
   }
 
   ReportHandler? _getReportHandlerFromExplicitExceptionHandlerMap(
-    error,
+    dynamic error,
   ) {
     final errorName = error != null ? error.toString().toLowerCase() : '';
     ReportHandler? reportHandler;

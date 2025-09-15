@@ -1,3 +1,7 @@
+## 2.1.4
+* Allow `device_info_plus` versions `12.x`
+* Allow `package_info_plus` versions `9.x`
+
 ## 2.1.3
 * Allow better integration of `go_router`/`MaterialApp.router(...)` (Thanks to [@IVLIVS-III](https://github.com/IVLIVS-III) in [#48](https://github.com/ThexXTURBOXx/catcher_2/pull/48))
 

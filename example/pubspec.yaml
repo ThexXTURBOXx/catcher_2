@@ -30,12 +30,12 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   dio: ^5.0.1
-  flutter_local_notifications: '>=17.0.0 <20.0.0'
+  flutter_local_notifications: ^19.0.0
   flutter_localizations:
     sdk: flutter
   path_provider: ^2.0.1
-  permission_handler: ^11.0.0
-  sentry: '>=7.2.0 <10.0.0'
+  permission_handler: ^12.0.0
+  sentry: ^9.0.0
 
 dev_dependencies:
   integration_test:
@@ -48,7 +48,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

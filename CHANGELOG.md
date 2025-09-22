@@ -1,3 +1,6 @@
+## 2.1.5
+* Allow `fluttertoast` versions `9.x`
+
 ## 2.1.4
 * Allow `device_info_plus` versions `12.x`
 * Allow `package_info_plus` versions `9.x`

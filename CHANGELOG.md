@@ -1,3 +1,7 @@
+## 2.1.6
+* Cleanup some handlers
+* Allow `mailer` versions `7.x`
+
 ## 2.1.5
 * Allow `fluttertoast` versions `9.x`
 

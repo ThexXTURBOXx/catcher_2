@@ -4,7 +4,6 @@ import 'package:catcher_2/model/http_request_type.dart';
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
 import 'package:catcher_2/model/report_handler.dart';
-import 'package:catcher_2/utils/catcher_2_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -36,12 +35,6 @@ class HttpHandler extends ReportHandler {
 
   @override
   Future<bool> handle(Report report, BuildContext? context) async {
-    if (report.platformType != PlatformType.web &&
-        !(await Catcher2Utils.isInternetConnectionAvailable())) {
-      _printLog('No internet connection available');
-      return false;
-    }
-
     if (requestType == HttpRequestType.post) {
       return _sendPost(report);
     }

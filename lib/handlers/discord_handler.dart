@@ -32,30 +32,29 @@ class DiscordHandler extends ReportHandler {
 
   @override
   Future<bool> handle(Report report, BuildContext? context) async {
-    if (report.platformType != PlatformType.web &&
-        !(await Catcher2Utils.isInternetConnectionAvailable())) {
-      _printLog('No internet connection available');
+    try {
+      var message = '';
+      if (customMessageBuilder != null) {
+        message = await customMessageBuilder!(report);
+      } else {
+        message = _buildMessage(report);
+      }
+      final messages = _setupMessages(message);
+
+      for (final value in messages) {
+        final isLastMessage = messages.indexOf(value) == messages.length - 1;
+        final result =
+            await _sendContent(value, isLastMessage ? report.screenshot : null);
+        if (!result) {
+          return result;
+        }
+      }
+
+      return true;
+    } catch (exception) {
+      _printLog('Failed to send Discord message: $exception');
       return false;
     }
-
-    var message = '';
-    if (customMessageBuilder != null) {
-      message = await customMessageBuilder!(report);
-    } else {
-      message = _buildMessage(report);
-    }
-    final messages = _setupMessages(message);
-
-    for (final value in messages) {
-      final isLastMessage = messages.indexOf(value) == messages.length - 1;
-      final result =
-          await _sendContent(value, isLastMessage ? report.screenshot : null);
-      if (!result) {
-        return result;
-      }
-    }
-
-    return true;
   }
 
   List<String> _setupMessages(String message) {

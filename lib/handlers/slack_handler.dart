@@ -44,10 +44,6 @@ class SlackHandler extends ReportHandler {
   @override
   Future<bool> handle(Report report, BuildContext? context) async {
     try {
-      if (!(await Catcher2Utils.isInternetConnectionAvailable())) {
-        _printLog('No internet connection available');
-        return false;
-      }
       var message = '';
       if (customMessageBuilder != null) {
         message = await customMessageBuilder!(report);
@@ -83,7 +79,7 @@ class SlackHandler extends ReportHandler {
 
       return response.ok;
     } catch (exception) {
-      _printLog('Failed to send slack message: $exception');
+      _printLog('Failed to send Slack message: $exception');
       return false;
     }
   }

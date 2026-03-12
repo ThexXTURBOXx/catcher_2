@@ -1,3 +1,6 @@
+## 2.1.7
+* Do not print empty sections in `ConsoleHandler`
+
 ## 2.1.6
 * Cleanup some handlers
 * Allow `mailer` versions `7.x`

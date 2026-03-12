@@ -71,7 +71,7 @@ class ConsoleHandler extends ReportHandler {
   }
 
   void _printStackTraceFormatted(dynamic stackTrace) {
-    if (stackTrace?.isEmpty ?? true) return;
+    if (stackTrace == null) return;
     logger.info('------- STACK TRACE -------');
     stackTrace?.toString().split('\n').forEach((entry) => logger.info(entry));
   }

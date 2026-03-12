@@ -1,3 +1,6 @@
+## 2.1.8
+* Fix critical bug in `ConsoleHandler`
+
 ## 2.1.7
 * Do not print empty sections in `ConsoleHandler`
 

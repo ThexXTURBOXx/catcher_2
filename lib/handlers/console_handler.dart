@@ -53,6 +53,7 @@ class ConsoleHandler extends ReportHandler {
   }
 
   void _printDeviceParametersFormatted(Map<String, dynamic> deviceParameters) {
+    if (deviceParameters.isEmpty) return;
     logger.info('------- DEVICE INFO -------');
     for (final entry in deviceParameters.entries) {
       logger.info('${entry.key}: ${entry.value}');
@@ -62,22 +63,25 @@ class ConsoleHandler extends ReportHandler {
   void _printApplicationParametersFormatted(
     Map<String, dynamic> applicationParameters,
   ) {
+    if (applicationParameters.isEmpty) return;
     logger.info('------- APP INFO -------');
     for (final entry in applicationParameters.entries) {
       logger.info('${entry.key}: ${entry.value}');
     }
   }
 
+  void _printStackTraceFormatted(dynamic stackTrace) {
+    if (stackTrace?.isEmpty ?? true) return;
+    logger.info('------- STACK TRACE -------');
+    stackTrace?.toString().split('\n').forEach((entry) => logger.info(entry));
+  }
+
   void _printCustomParametersFormatted(Map<String, dynamic> customParameters) {
+    if (customParameters.isEmpty) return;
     logger.info('------- CUSTOM INFO -------');
     for (final entry in customParameters.entries) {
       logger.info('${entry.key}: ${entry.value}');
     }
-  }
-
-  void _printStackTraceFormatted(dynamic stackTrace) {
-    logger.info('------- STACK TRACE -------');
-    stackTrace?.toString().split('\n').forEach((entry) => logger.info(entry));
   }
 
   @override

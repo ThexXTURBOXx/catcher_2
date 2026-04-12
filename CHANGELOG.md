@@ -1,3 +1,7 @@
+## 2.1.9
+* Allow `device_info_plus` versions `13.x`
+* Allow `package_info_plus` versions `10.x`
+
 ## 2.1.8
 * Fix critical bug in `ConsoleHandler`
 

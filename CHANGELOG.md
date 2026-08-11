@@ -1,3 +1,6 @@
+## 2.1.11
+* Allow `sentry` versions `10.x` (from now on, built-in Kotlin and AGP 9+ are fully supported)
+
 ## 2.1.10
 * Allow `fluttertoast` versions `10.x`
 

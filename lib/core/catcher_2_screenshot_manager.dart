@@ -32,7 +32,7 @@ class Catcher2ScreenshotManager {
       );
 
       if (content != null) {
-        return saveFile(content);
+        return await saveFile(content);
       }
     } catch (exception) {
       _logger.warning('Failed to create screenshot file: $exception');

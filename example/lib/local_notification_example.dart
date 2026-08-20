@@ -65,6 +65,7 @@ class NotificationReportMode extends ReportMode {
     this.channelDescription = 'Catcher 2 default channel',
     this.icon = '@mipmap/ic_launcher',
   });
+
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
   late Report _lastReport;
 
@@ -92,7 +93,7 @@ class NotificationReportMode extends ReportMode {
       iOS: initializationSettingsIOS,
     );
     _flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse: onSelectedNotification,
     );
   }
@@ -123,10 +124,10 @@ class NotificationReportMode extends ReportMode {
     );
 
     await _flutterLocalNotificationsPlugin.show(
-      0,
-      localizationOptions.notificationReportModeTitle,
-      localizationOptions.notificationReportModeContent,
-      platformChannelSpecifics,
+      id: 0,
+      title: localizationOptions.notificationReportModeTitle,
+      body: localizationOptions.notificationReportModeContent,
+      notificationDetails: platformChannelSpecifics,
       payload: '',
     );
   }

@@ -30,11 +30,11 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   dio: ^5.0.1
-  flutter_local_notifications: ^19.0.0
+  flutter_local_notifications: ^22.0.0
   flutter_localizations:
     sdk: flutter
   path_provider: ^2.0.1
-  permission_handler: ^12.0.0
+  permission_handler: ^13.0.0
   sentry: ^9.0.0
 
 dev_dependencies:

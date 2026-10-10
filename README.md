@@ -99,7 +99,7 @@ To start using Catcher 2, you have to:
 Here is complete example:   
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:catcher_2/catcher_2.dart';
 
 main() {
@@ -426,7 +426,7 @@ LocalizationOptions.buildDefaultTurkishOptions();
 
 Complete Example:
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:catcher_2/catcher_2.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

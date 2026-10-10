@@ -4,9 +4,9 @@ import 'dart:ui' as ui;
 
 import 'package:catcher_2/utils/catcher_2_logger.dart';
 import 'package:cross_file/cross_file.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Manager which takes screenshot of configured widget. Screenshot will be
 /// saved to file which can be reused later.

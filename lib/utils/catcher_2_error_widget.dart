@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class Catcher2ErrorWidget extends StatelessWidget {
   const Catcher2ErrorWidget({

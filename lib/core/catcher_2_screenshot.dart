@@ -1,5 +1,5 @@
 import 'package:catcher_2/core/catcher_2.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Screenshot widget used to create screenshot of all child widgets.
 class Catcher2Screenshot extends StatefulWidget {

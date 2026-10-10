@@ -7,7 +7,7 @@ import 'package:catcher_2/model/report_handler.dart';
 import 'package:catcher_2/utils/catcher_2_utils.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SlackHandler extends ReportHandler {
   SlackHandler(

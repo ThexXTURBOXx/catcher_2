@@ -4,7 +4,7 @@ import 'package:catcher_2/model/report.dart';
 import 'package:catcher_2/model/report_handler.dart';
 import 'package:catcher_2/model/toast_handler_gravity.dart';
 import 'package:catcher_2/model/toast_handler_length.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ToastHandler extends ReportHandler {

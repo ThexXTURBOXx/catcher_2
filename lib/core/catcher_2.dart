@@ -16,7 +16,7 @@ import 'package:catcher_2/utils/catcher_2_logger.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class Catcher2 implements ReportModeAction {

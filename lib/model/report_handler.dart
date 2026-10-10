@@ -2,7 +2,7 @@ import 'package:catcher_2/model/localization_options.dart';
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
 import 'package:catcher_2/utils/catcher_2_logger.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class ReportHandler {
   /// Logger instance

@@ -51,7 +51,7 @@ class ToastHandler extends ReportHandler {
             context,
             PageRouteBuilder(
               opaque: false,
-              pageBuilder: (_, __, ___) => FlutterToastPage(
+              pageBuilder: (_, _, _) => FlutterToastPage(
                 _getErrorMessage(report),
                 _getGravity(),
                 Duration(seconds: _getLengthIos()),

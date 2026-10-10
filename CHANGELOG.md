@@ -1,3 +1,6 @@
+## 3.0.0-alpha.0
+* [BREAKING CHANGE] Migrate to `material_ui` and `cupertino_ui` packages
+
 ## 2.1.12
 * Fix lint
 

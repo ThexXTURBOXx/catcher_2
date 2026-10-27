@@ -62,9 +62,7 @@ class SlackHandler extends ReportHandler {
       _printLog('Sending request to Slack server...');
 
       if (screenshot != null) {
-        data.addAll(
-          await _tryUploadScreenshot(screenshot: screenshot),
-        );
+        data.addAll(await _tryUploadScreenshot(screenshot: screenshot));
       }
 
       final response = await _dio.post<dynamic>(
@@ -72,9 +70,10 @@ class SlackHandler extends ReportHandler {
         data: json.encode(data),
         options: Options(contentType: Headers.formUrlEncodedContentType),
       );
-      _printLog(
-        'Server responded with code: ${response.statusCode} and '
-        'message: ${response.statusMessage}',
+      _logServerResponse(
+        'message post',
+        response.statusMessage,
+        response.statusCode,
       );
 
       return response.ok;
@@ -107,18 +106,16 @@ class SlackHandler extends ReportHandler {
       final responseFile = await _dio.post<dynamic>(
         'https://slack.com/api/files.getUploadURLExternal',
         data: formData,
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-        ),
+        options: Options(contentType: Headers.formUrlEncodedContentType),
       );
       if (responseFile.data == null ||
           responseFile.data['ok'] != true ||
           responseFile.data['upload_url'] == null ||
           responseFile.data['file_id'] == null) {
-        _printLog(
-          'Server responded to getUploadURLExternal with code: '
-          '${responseFile.statusCode} '
-          'and message upload file: ${responseFile.statusMessage}',
+        _logServerResponse(
+          'getUploadURLExternal',
+          responseFile.statusMessage,
+          responseFile.statusCode,
         );
         return {};
       }
@@ -139,10 +136,10 @@ class SlackHandler extends ReportHandler {
         ),
       );
       if (!responseFilePost.ok) {
-        _printLog(
-          'Server responded to upload file post with code: '
-          '${responseFilePost.statusCode} '
-          'and message upload file: ${responseFilePost.statusMessage}',
+        _logServerResponse(
+          'upload file post',
+          responseFilePost.statusMessage,
+          responseFilePost.statusCode,
         );
         return {};
       }
@@ -155,15 +152,13 @@ class SlackHandler extends ReportHandler {
       final responseFileComplete = await _dio.post<dynamic>(
         'https://slack.com/api/files.completeUploadExternal',
         data: formDataComplete,
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-        ),
+        options: Options(contentType: Headers.formUrlEncodedContentType),
       );
 
-      _printLog(
-        'Server responded to completeUploadExternal with code: '
-        '${responseFileComplete.statusCode} '
-        'and message upload file: ${responseFileComplete.statusMessage}',
+      _logServerResponse(
+        'completeUploadExternal',
+        responseFileComplete.statusMessage,
+        responseFileComplete.statusCode,
       );
 
       if (responseFileComplete.data == null ||
@@ -175,7 +170,8 @@ class SlackHandler extends ReportHandler {
         'attachments': [
           {
             'image_url': responseFileComplete.data['files'][0]['url_private'],
-            'text': 'Screenshot will soon be available here: '
+            'text':
+                'Screenshot will soon be available here: '
                 '${responseFileComplete.data['files'][0]['permalink']}',
           },
         ],
@@ -219,6 +215,20 @@ class SlackHandler extends ReportHandler {
     return stringBuffer.toString();
   }
 
+  void _logServerResponse(
+    String method,
+    String? statusMessage,
+    int? statusCode,
+  ) {
+    if (statusMessage == null || statusMessage.isEmpty) {
+      _printLog('Server responded to $method with code: $statusCode');
+    } else {
+      _printLog(
+        'Server responded to $method with code: $statusCode and message: $statusMessage',
+      );
+    }
+  }
+
   void _printLog(String log) {
     if (printLogs) {
       logger.info(log);
@@ -227,11 +237,11 @@ class SlackHandler extends ReportHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.web,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.web,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 }

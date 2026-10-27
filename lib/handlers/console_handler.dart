@@ -86,13 +86,13 @@ class ConsoleHandler extends ReportHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.web,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.web,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 
   @override
   bool shouldHandleWhenRejected() => handleWhenRejected;

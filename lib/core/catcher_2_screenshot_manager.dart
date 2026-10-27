@@ -26,10 +26,7 @@ class Catcher2ScreenshotManager {
     Duration delay = const Duration(milliseconds: 20),
   }) async {
     try {
-      final content = await _capture(
-        pixelRatio: pixelRatio,
-        delay: delay,
-      );
+      final content = await _capture(pixelRatio: pixelRatio, delay: delay);
 
       if (content != null) {
         return await saveFile(content);
@@ -61,8 +58,9 @@ class Catcher2ScreenshotManager {
             delay: Duration.zero,
             pixelRatio: pixelRatio,
           );
-          final byteData =
-              await image?.toByteData(format: ui.ImageByteFormat.png);
+          final byteData = await image?.toByteData(
+            format: ui.ImageByteFormat.png,
+          );
           image?.dispose();
           return byteData?.buffer.asUint8List();
         } catch (exception) {
@@ -78,8 +76,8 @@ class Catcher2ScreenshotManager {
       //Delay is required. See Issue https://github.com/flutter/flutter/issues/22308
       Future.delayed(delay, () async {
         try {
-          final findRenderObject =
-              _containerKey.currentContext?.findRenderObject();
+          final findRenderObject = _containerKey.currentContext
+              ?.findRenderObject();
 
           if (findRenderObject == null) {
             return null;

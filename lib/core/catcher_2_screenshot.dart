@@ -21,7 +21,7 @@ class Catcher2ScreenshotState extends State<Catcher2Screenshot>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => RepaintBoundary(
-        key: widget.catcher2.screenshotManager.containerKey,
-        child: widget.child,
-      );
+    key: widget.catcher2.screenshotManager.containerKey,
+    child: widget.child,
+  );
 }

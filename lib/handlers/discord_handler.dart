@@ -43,8 +43,10 @@ class DiscordHandler extends ReportHandler {
 
       for (final value in messages) {
         final isLastMessage = messages.indexOf(value) == messages.length - 1;
-        final result =
-            await _sendContent(value, isLastMessage ? report.screenshot : null);
+        final result = await _sendContent(
+          value,
+          isLastMessage ? report.screenshot : null,
+        );
         if (!result) {
           return result;
         }
@@ -110,19 +112,15 @@ class DiscordHandler extends ReportHandler {
       _printLog('Sending request to Discord server...');
       Response<dynamic>? response;
 
-      final data = <String, dynamic>{
-        'content': content,
-      };
+      final data = <String, dynamic>{'content': content};
 
       if (screenshot != null) {
-        data.addAll(
-          {
-            'file': MultipartFile.fromBytes(
-              await screenshot.readAsBytes(),
-              filename: screenshot.name,
-            ),
-          },
-        );
+        data.addAll({
+          'file': MultipartFile.fromBytes(
+            await screenshot.readAsBytes(),
+            filename: screenshot.name,
+          ),
+        });
       }
 
       response = await _dio.post<dynamic>(
@@ -130,10 +128,15 @@ class DiscordHandler extends ReportHandler {
         data: FormData.fromMap(data),
       );
 
-      _printLog(
-        'Server responded with code: ${response.statusCode} and message: '
-        '${response.statusMessage}',
-      );
+      final statusMessage = response.statusMessage;
+      if (statusMessage == null || statusMessage.isEmpty) {
+        _printLog('Server responded with code: ${response.statusCode}');
+      } else {
+        _printLog(
+          'Server responded with code: ${response.statusCode} and message: '
+          '$statusMessage',
+        );
+      }
       return response.ok;
     } catch (exception) {
       _printLog('Failed to send data to Discord server: $exception');
@@ -149,11 +152,11 @@ class DiscordHandler extends ReportHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.web,
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.web,
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 }

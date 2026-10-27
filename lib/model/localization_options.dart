@@ -7,15 +7,15 @@ class LocalizationOptions {
     this.dialogReportModeTitle = 'Crash',
     this.dialogReportModeDescription =
         'Unexpected error occurred in application. Error report is ready to '
-            'send to support team. Please click Accept to send error report or '
-            'Cancel to dismiss report.',
+        'send to support team. Please click Accept to send error report or '
+        'Cancel to dismiss report.',
     this.dialogReportModeAccept = 'Accept',
     this.dialogReportModeCancel = 'Cancel',
     this.pageReportModeTitle = 'Crash',
     this.pageReportModeDescription =
         'Unexpected error occurred in application. Error report is ready to '
-            'send to support team. Please click Accept to send error report or '
-            'Cancel to dismiss report.',
+        'send to support team. Please click Accept to send error report or '
+        'Cancel to dismiss report.',
     this.pageReportModeAccept = 'Accept',
     this.pageReportModeCancel = 'Cancel',
     this.toastHandlerDescription = 'Error occurred:',
@@ -32,14 +32,16 @@ class LocalizationOptions {
         notificationReportModeContent:
             'انقر هنا لإرسال تقرير الخطأ إلى فريق الدعم.',
         dialogReportModeTitle: 'حدث خطأ',
-        dialogReportModeDescription: 'حدث خطأ غير متوقع في التطبيق.'
+        dialogReportModeDescription:
+            'حدث خطأ غير متوقع في التطبيق.'
             ' تقرير الخطأ جاهز للإرسال إلى فريق الدعم.'
             ' الرجاء النقر فوق "قبول" لإرسال تقرير الخطأ'
             ' أو "إلغاء" لرفض.',
         dialogReportModeAccept: 'قبول',
         dialogReportModeCancel: 'إلغاء',
         pageReportModeTitle: 'حدث خطأ',
-        pageReportModeDescription: 'حدث خطأ غير متوقع في التطبيق.'
+        pageReportModeDescription:
+            'حدث خطأ غير متوقع في التطبيق.'
             ' تقرير الخطأ جاهز للإرسال إلى فريق الدعم.'
             ' الرجاء النقر فوق "قبول" لإرسال تقرير الخطأ'
             ' أو "إلغاء" للرفض.',
@@ -69,27 +71,27 @@ class LocalizationOptions {
       );
 
   factory LocalizationOptions.buildDefaultHindiOptions() => LocalizationOptions(
-        'hi',
-        notificationReportModeTitle: 'एप्लिकेशन त्रुटि हुई',
-        notificationReportModeContent:
-            'समर्थन टीम को त्रुटि रिपोर्ट भेजने के लिए यहां क्लिक करें।.',
-        dialogReportModeTitle: 'दुर्घटना',
-        dialogReportModeDescription:
-            'आवेदन में अप्रत्याशित त्रुटि हुई। त्रुटि रिपोर्ट समर्थन टीम को '
-            'भेजने के लिए तैयार है। कृपया त्रुटि रिपोर्ट भेजने के लिए स्वीकार '
-            'करें या रिपोर्ट को रद्द करने के लिए रद्द करें पर क्लिक करें।',
-        dialogReportModeAccept: 'स्वीकार करना',
-        dialogReportModeCancel: 'रद्द करना',
-        pageReportModeTitle: 'दुर्घटना',
-        pageReportModeDescription:
-            'आवेदन में अप्रत्याशित त्रुटि हुई। त्रुटि रिपोर्ट समर्थन टीम को '
-            'भेजने के लिए तैयार है। कृपया त्रुटि रिपोर्ट भेजने के लिए स्वीकार '
-            'करें या रिपोर्ट को रद्द करने के लिए रद्द करें पर क्लिक करें।',
-        pageReportModeAccept: 'स्वीकार करना',
-        pageReportModeCancel: 'रद्द करना',
-        toastHandlerDescription: 'त्रुटि हुई:',
-        snackbarHandlerDescription: 'त्रुटि हुई:',
-      );
+    'hi',
+    notificationReportModeTitle: 'एप्लिकेशन त्रुटि हुई',
+    notificationReportModeContent:
+        'समर्थन टीम को त्रुटि रिपोर्ट भेजने के लिए यहां क्लिक करें।.',
+    dialogReportModeTitle: 'दुर्घटना',
+    dialogReportModeDescription:
+        'आवेदन में अप्रत्याशित त्रुटि हुई। त्रुटि रिपोर्ट समर्थन टीम को '
+        'भेजने के लिए तैयार है। कृपया त्रुटि रिपोर्ट भेजने के लिए स्वीकार '
+        'करें या रिपोर्ट को रद्द करने के लिए रद्द करें पर क्लिक करें।',
+    dialogReportModeAccept: 'स्वीकार करना',
+    dialogReportModeCancel: 'रद्द करना',
+    pageReportModeTitle: 'दुर्घटना',
+    pageReportModeDescription:
+        'आवेदन में अप्रत्याशित त्रुटि हुई। त्रुटि रिपोर्ट समर्थन टीम को '
+        'भेजने के लिए तैयार है। कृपया त्रुटि रिपोर्ट भेजने के लिए स्वीकार '
+        'करें या रिपोर्ट को रद्द करने के लिए रद्द करें पर क्लिक करें।',
+    pageReportModeAccept: 'स्वीकार करना',
+    pageReportModeCancel: 'रद्द करना',
+    toastHandlerDescription: 'त्रुटि हुई:',
+    snackbarHandlerDescription: 'त्रुटि हुई:',
+  );
 
   factory LocalizationOptions.buildDefaultSpanishOptions() =>
       LocalizationOptions(
@@ -119,28 +121,28 @@ class LocalizationOptions {
       );
 
   factory LocalizationOptions.buildDefaultMalayOptions() => LocalizationOptions(
-        'ms',
-        notificationReportModeTitle: 'Ralat permohonan berlaku',
-        notificationReportModeContent:
-            'Klik di sini untuk menghantar laporan ralat untuk menyokong '
-            'pasukan.',
-        dialogReportModeTitle: 'Kemalangan',
-        dialogReportModeDescription:
-            'Ralat tidak dijangka berlaku dalam aplikasi. Laporan ralat sedia '
-            'dihantar untuk menyokong pasukan. Sila klik Terima untuk '
-            'menghantar laporan ralat atau Batal untuk menolak laporan.',
-        dialogReportModeAccept: 'Terima',
-        dialogReportModeCancel: 'Batalkan',
-        pageReportModeTitle: 'Kemalangan',
-        pageReportModeDescription:
-            'Ralat tidak dijangka berlaku dalam aplikasi. Laporan ralat sedia '
-            'dihantar untuk menyokong pasukan. Sila klik Terima untuk '
-            'menghantar laporan ralat atau Batal untuk menolak laporan.',
-        pageReportModeAccept: 'Terima',
-        pageReportModeCancel: 'Batalkan',
-        toastHandlerDescription: 'Ralat berlaku:',
-        snackbarHandlerDescription: 'Ralat berlaku:',
-      );
+    'ms',
+    notificationReportModeTitle: 'Ralat permohonan berlaku',
+    notificationReportModeContent:
+        'Klik di sini untuk menghantar laporan ralat untuk menyokong '
+        'pasukan.',
+    dialogReportModeTitle: 'Kemalangan',
+    dialogReportModeDescription:
+        'Ralat tidak dijangka berlaku dalam aplikasi. Laporan ralat sedia '
+        'dihantar untuk menyokong pasukan. Sila klik Terima untuk '
+        'menghantar laporan ralat atau Batal untuk menolak laporan.',
+    dialogReportModeAccept: 'Terima',
+    dialogReportModeCancel: 'Batalkan',
+    pageReportModeTitle: 'Kemalangan',
+    pageReportModeDescription:
+        'Ralat tidak dijangka berlaku dalam aplikasi. Laporan ralat sedia '
+        'dihantar untuk menyokong pasukan. Sila klik Terima untuk '
+        'menghantar laporan ralat atau Batal untuk menolak laporan.',
+    pageReportModeAccept: 'Terima',
+    pageReportModeCancel: 'Batalkan',
+    toastHandlerDescription: 'Ralat berlaku:',
+    snackbarHandlerDescription: 'Ralat berlaku:',
+  );
 
   factory LocalizationOptions.buildDefaultRussianOptions() =>
       LocalizationOptions(
@@ -293,30 +295,30 @@ class LocalizationOptions {
       );
 
   factory LocalizationOptions.buildDefaultDutchOptions() => LocalizationOptions(
-        'nl',
-        notificationReportModeTitle: 'Er is een fout opgetreden',
-        notificationReportModeContent:
-            'Klik hier om het foutrapport te versturen naar het '
-            'ondersteuningsteam.',
-        dialogReportModeTitle: 'Error',
-        dialogReportModeDescription:
-            'Er is een onverwachte fout opgetreden in de applicatie. Het '
-            'foutrapport is klaar om naar het ondersteuningsteam te worden '
-            'verstuurd. Druk op accepteer om het rapport te versturen of op '
-            'annuleer om het rapport te verwijderen.',
-        dialogReportModeAccept: 'Accepteer',
-        dialogReportModeCancel: 'Annuleer',
-        pageReportModeTitle: 'Error',
-        pageReportModeDescription:
-            'Er is een onverwachte fout opgetreden in de applicatie. Het '
-            'foutrapport is klaar om naar het ondersteuningsteam te worden '
-            'verstuurd. Druk op accepteer om het rapport te versturen of op '
-            'annuleer om het rapport te verwijderen.',
-        pageReportModeAccept: 'Accepteer',
-        pageReportModeCancel: 'Annuleer',
-        toastHandlerDescription: 'Der er sket en fejl:',
-        snackbarHandlerDescription: 'Der er sket en fejl:',
-      );
+    'nl',
+    notificationReportModeTitle: 'Er is een fout opgetreden',
+    notificationReportModeContent:
+        'Klik hier om het foutrapport te versturen naar het '
+        'ondersteuningsteam.',
+    dialogReportModeTitle: 'Error',
+    dialogReportModeDescription:
+        'Er is een onverwachte fout opgetreden in de applicatie. Het '
+        'foutrapport is klaar om naar het ondersteuningsteam te worden '
+        'verstuurd. Druk op accepteer om het rapport te versturen of op '
+        'annuleer om het rapport te verwijderen.',
+    dialogReportModeAccept: 'Accepteer',
+    dialogReportModeCancel: 'Annuleer',
+    pageReportModeTitle: 'Error',
+    pageReportModeDescription:
+        'Er is een onverwachte fout opgetreden in de applicatie. Het '
+        'foutrapport is klaar om naar het ondersteuningsteam te worden '
+        'verstuurd. Druk op accepteer om het rapport te versturen of op '
+        'annuleer om het rapport te verwijderen.',
+    pageReportModeAccept: 'Accepteer',
+    pageReportModeCancel: 'Annuleer',
+    toastHandlerDescription: 'Der er sket en fejl:',
+    snackbarHandlerDescription: 'Der er sket en fejl:',
+  );
 
   factory LocalizationOptions.buildDefaultGermanOptions() =>
       LocalizationOptions(
@@ -404,29 +406,27 @@ class LocalizationOptions {
     String? pageReportModeCancel,
     String? toastHandlerDescription,
     String? snackbarHandlerDescription,
-  }) =>
-      LocalizationOptions(
-        languageCode ?? this.languageCode,
-        notificationReportModeTitle:
-            notificationReportModeTitle ?? this.notificationReportModeTitle,
-        notificationReportModeContent:
-            notificationReportModeContent ?? this.notificationReportModeContent,
-        dialogReportModeTitle:
-            dialogReportModeTitle ?? this.dialogReportModeTitle,
-        dialogReportModeDescription:
-            dialogReportModeDescription ?? this.dialogReportModeDescription,
-        dialogReportModeAccept:
-            dialogReportModeAccept ?? this.dialogReportModeAccept,
-        dialogReportModeCancel:
-            dialogReportModeCancel ?? this.dialogReportModeCancel,
-        pageReportModeTitle: pageReportModeTitle ?? this.pageReportModeTitle,
-        pageReportModeDescription:
-            pageReportModeDescription ?? this.pageReportModeDescription,
-        pageReportModeAccept: pageReportModeAccept ?? this.pageReportModeAccept,
-        pageReportModeCancel: pageReportModeCancel ?? this.pageReportModeCancel,
-        toastHandlerDescription:
-            toastHandlerDescription ?? this.toastHandlerDescription,
-        snackbarHandlerDescription:
-            snackbarHandlerDescription ?? this.snackbarHandlerDescription,
-      );
+  }) => LocalizationOptions(
+    languageCode ?? this.languageCode,
+    notificationReportModeTitle:
+        notificationReportModeTitle ?? this.notificationReportModeTitle,
+    notificationReportModeContent:
+        notificationReportModeContent ?? this.notificationReportModeContent,
+    dialogReportModeTitle: dialogReportModeTitle ?? this.dialogReportModeTitle,
+    dialogReportModeDescription:
+        dialogReportModeDescription ?? this.dialogReportModeDescription,
+    dialogReportModeAccept:
+        dialogReportModeAccept ?? this.dialogReportModeAccept,
+    dialogReportModeCancel:
+        dialogReportModeCancel ?? this.dialogReportModeCancel,
+    pageReportModeTitle: pageReportModeTitle ?? this.pageReportModeTitle,
+    pageReportModeDescription:
+        pageReportModeDescription ?? this.pageReportModeDescription,
+    pageReportModeAccept: pageReportModeAccept ?? this.pageReportModeAccept,
+    pageReportModeCancel: pageReportModeCancel ?? this.pageReportModeCancel,
+    toastHandlerDescription:
+        toastHandlerDescription ?? this.toastHandlerDescription,
+    snackbarHandlerDescription:
+        snackbarHandlerDescription ?? this.snackbarHandlerDescription,
+  );
 }

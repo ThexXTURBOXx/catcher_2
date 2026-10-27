@@ -5,9 +5,9 @@ import 'package:catcher_2/handlers/base_email_handler.dart';
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
 import 'package:cross_file/cross_file.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:material_ui/material_ui.dart';
 
 class EmailAutoHandler extends BaseEmailHandler {
   EmailAutoHandler(
@@ -77,12 +77,12 @@ class EmailAutoHandler extends BaseEmailHandler {
   }
 
   SmtpServer _setupSmtpServer() => SmtpServer(
-        smtpHost,
-        port: smtpPort,
-        ssl: enableSsl,
-        username: senderUsername ?? senderEmail,
-        password: senderPassword,
-      );
+    smtpHost,
+    port: smtpPort,
+    ssl: enableSsl,
+    username: senderUsername ?? senderEmail,
+    password: senderPassword,
+  );
 
   void _printLog(String log) {
     if (printLogs) {
@@ -92,13 +92,13 @@ class EmailAutoHandler extends BaseEmailHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.web,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.web,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 }
 
 class XFilePngAttachment extends Attachment {

@@ -7,15 +7,13 @@ class Catcher2Logger {
   /// Setup logger configuration.
   void setup() {
     Logger.root.level = Level.ALL;
-    Logger.root.onRecord.listen(
-      (rec) {
-        // ignore: avoid_print
-        print(
-          '[${rec.time} | ${rec.loggerName} | ${rec.level.name}] '
-          '${rec.message}',
-        );
-      },
-    );
+    Logger.root.onRecord.listen((rec) {
+      // ignore: avoid_print
+      print(
+        '[${rec.time} | ${rec.loggerName} | ${rec.level.name}] '
+        '${rec.message}',
+      );
+    });
   }
 
   /// Log info message.

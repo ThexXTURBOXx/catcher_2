@@ -4,8 +4,8 @@ import 'package:catcher_2/model/report.dart';
 import 'package:catcher_2/model/report_handler.dart';
 import 'package:catcher_2/model/toast_handler_gravity.dart';
 import 'package:catcher_2/model/toast_handler_length.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ToastHandler extends ReportHandler {
   ToastHandler({
@@ -41,28 +41,25 @@ class ToastHandler extends ReportHandler {
         fontSize: textSize,
       );
     } else {
-      Future.delayed(
-        const Duration(milliseconds: 500),
-        () {
-          if (context == null || !context.mounted) {
-            return;
-          }
-          Navigator.push<void>(
-            context,
-            PageRouteBuilder(
-              opaque: false,
-              pageBuilder: (_, _, _) => FlutterToastPage(
-                _getErrorMessage(report),
-                _getGravity(),
-                Duration(seconds: _getLengthIos()),
-                backgroundColor,
-                textColor,
-                textSize,
-              ),
+      Future.delayed(const Duration(milliseconds: 500), () {
+        if (context == null || !context.mounted) {
+          return;
+        }
+        Navigator.push<void>(
+          context,
+          PageRouteBuilder(
+            opaque: false,
+            pageBuilder: (_, _, _) => FlutterToastPage(
+              _getErrorMessage(report),
+              _getGravity(),
+              Duration(seconds: _getLengthIos()),
+              backgroundColor,
+              textColor,
+              textSize,
             ),
-          );
-        },
-      );
+          ),
+        );
+      });
     }
 
     return true;
@@ -91,13 +88,13 @@ class ToastHandler extends ReportHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.web,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.web,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 
   @override
   bool isContextRequired() => true;
@@ -149,10 +146,7 @@ class _FlutterToastPageState extends State<FlutterToastPage> {
         color: widget.backgroundColor,
         child: Text(
           widget.text,
-          style: TextStyle(
-            color: widget.textColor,
-            fontSize: widget.textSize,
-          ),
+          style: TextStyle(color: widget.textColor, fontSize: widget.textSize),
         ),
       ),
       gravity: widget.gravity,

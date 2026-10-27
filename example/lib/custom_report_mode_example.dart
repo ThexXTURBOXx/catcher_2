@@ -89,6 +89,7 @@ class CustomPageReportMode extends ReportMode {
 
 class CustomPage extends StatelessWidget {
   const CustomPage(this.reportMode, this.report, {super.key});
+
   final ReportMode reportMode;
   final Report report;
 

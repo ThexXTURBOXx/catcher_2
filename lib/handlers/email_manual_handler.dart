@@ -1,8 +1,8 @@
 import 'package:catcher_2/handlers/base_email_handler.dart';
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
+import 'package:material_ui/material_ui.dart';
 
 class EmailManualHandler extends BaseEmailHandler {
   EmailManualHandler(
@@ -31,9 +31,7 @@ class EmailManualHandler extends BaseEmailHandler {
         subject: getEmailTitle(report),
         recipients: recipients,
         isHTML: sendHtml,
-        attachments: [
-          report.screenshot?.path ?? '',
-        ],
+        attachments: [report.screenshot?.path ?? ''],
       );
       _printLog('Creating mail request');
       await FlutterMailer.send(mailOptions);
@@ -61,7 +59,7 @@ class EmailManualHandler extends BaseEmailHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+  ];
 }

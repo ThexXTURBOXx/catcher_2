@@ -102,8 +102,8 @@ class SentryHandler extends ReportHandler {
     var applicationVersion = '';
     final applicationParameters = report.applicationParameters;
     if (applicationParameters.containsKey('appName')) {
-      applicationVersion +=
-          (applicationParameters['appName'] as String?)!.toLowerCase();
+      applicationVersion += (applicationParameters['appName'] as String?)!
+          .toLowerCase();
     }
     if (applicationParameters.containsKey('version')) {
       applicationVersion += "@${applicationParameters["version"]}";
@@ -119,7 +119,8 @@ class SentryHandler extends ReportHandler {
         logger: loggerName,
         serverName: serverName,
         release: customRelease ?? _getApplicationVersion(report),
-        environment: customEnvironment ??
+        environment:
+            customEnvironment ??
             (report.applicationParameters['environment'] as String?),
         message: SentryMessage(report.error.toString()),
         throwable: report.error,
@@ -146,11 +147,11 @@ class SentryHandler extends ReportHandler {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.web,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.web,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 }

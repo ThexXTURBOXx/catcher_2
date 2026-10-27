@@ -5,9 +5,7 @@ import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:material_ui/material_ui.dart';
 
 class PageReportMode extends ReportMode {
-  PageReportMode({
-    this.showStackTrace = true,
-  });
+  PageReportMode({this.showStackTrace = true});
 
   final bool showStackTrace;
 
@@ -28,9 +26,7 @@ class PageReportMode extends ReportMode {
     }
     await Navigator.push<void>(
       context,
-      MaterialPageRoute(
-        builder: (context) => PageWidget(this, report),
-      ),
+      MaterialPageRoute(builder: (context) => PageWidget(this, report)),
     );
   }
 
@@ -39,21 +35,17 @@ class PageReportMode extends ReportMode {
 
   @override
   List<PlatformType> getSupportedPlatforms() => [
-        PlatformType.android,
-        PlatformType.iOS,
-        PlatformType.web,
-        PlatformType.linux,
-        PlatformType.macOS,
-        PlatformType.windows,
-      ];
+    PlatformType.android,
+    PlatformType.iOS,
+    PlatformType.web,
+    PlatformType.linux,
+    PlatformType.macOS,
+    PlatformType.windows,
+  ];
 }
 
 class PageWidget extends StatefulWidget {
-  const PageWidget(
-    this.pageReportMode,
-    this.report, {
-    super.key,
-  });
+  const PageWidget(this.pageReportMode, this.report, {super.key});
 
   final PageReportMode pageReportMode;
   final Report report;
@@ -66,92 +58,79 @@ class PageWidgetState extends State<PageWidget> {
   @override
   // ignore: deprecated_member_use
   Widget build(BuildContext context) => WillPopScope(
-        onWillPop: () async {
-          widget.pageReportMode.onActionRejected(widget.report);
-          return true;
-        },
-        child: Builder(
-          builder: (context) => Catcher2Utils.isCupertinoAppAncestor(context)
-              ? _buildCupertinoPage(context)
-              : _buildMaterialPage(context),
-        ),
-      );
+    onWillPop: () async {
+      widget.pageReportMode.onActionRejected(widget.report);
+      return true;
+    },
+    child: Builder(
+      builder: (context) => Catcher2Utils.isCupertinoAppAncestor(context)
+          ? _buildCupertinoPage(context)
+          : _buildMaterialPage(context),
+    ),
+  );
 
   Widget _buildMaterialPage(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            widget.pageReportMode.localizationOptions.pageReportModeTitle,
-          ),
-        ),
-        body: _buildInnerWidget(context),
-      );
+    appBar: AppBar(
+      title: Text(
+        widget.pageReportMode.localizationOptions.pageReportModeTitle,
+      ),
+    ),
+    body: _buildInnerWidget(context),
+  );
 
   Widget _buildCupertinoPage(BuildContext context) => CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text(
-            widget.pageReportMode.localizationOptions.pageReportModeTitle,
-          ),
-        ),
-        child: SafeArea(
-          child: _buildInnerWidget(context),
-        ),
-      );
+    navigationBar: CupertinoNavigationBar(
+      middle: Text(
+        widget.pageReportMode.localizationOptions.pageReportModeTitle,
+      ),
+    ),
+    child: SafeArea(child: _buildInnerWidget(context)),
+  );
 
   Widget _buildInnerWidget(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
+    padding: const EdgeInsets.symmetric(vertical: 10),
+    decoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
+    child: Column(
+      children: [
+        const Padding(padding: EdgeInsets.only(top: 10)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            widget.pageReportMode.localizationOptions.pageReportModeDescription,
+            style: _getTextStyle(15),
+            textAlign: TextAlign.center,
+          ),
         ),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+        const Padding(padding: EdgeInsets.only(top: 20)),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _getStackTraceWidget(),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextButton(
+              onPressed: _onAcceptClicked,
               child: Text(
-                widget.pageReportMode.localizationOptions
-                    .pageReportModeDescription,
-                style: _getTextStyle(15),
-                textAlign: TextAlign.center,
+                widget.pageReportMode.localizationOptions.pageReportModeAccept,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: _getStackTraceWidget(),
+            TextButton(
+              onPressed: _onCancelClicked,
+              child: Text(
+                widget.pageReportMode.localizationOptions.pageReportModeCancel,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextButton(
-                  onPressed: _onAcceptClicked,
-                  child: Text(
-                    widget.pageReportMode.localizationOptions
-                        .pageReportModeAccept,
-                  ),
-                ),
-                TextButton(
-                  onPressed: _onCancelClicked,
-                  child: Text(
-                    widget.pageReportMode.localizationOptions
-                        .pageReportModeCancel,
-                  ),
-                ),
-              ],
             ),
           ],
         ),
-      );
+      ],
+    ),
+  );
 
-  TextStyle _getTextStyle(double fontSize) => TextStyle(
-        fontSize: fontSize,
-        decoration: TextDecoration.none,
-      );
+  TextStyle _getTextStyle(double fontSize) =>
+      TextStyle(fontSize: fontSize, decoration: TextDecoration.none);
 
   Widget _getStackTraceWidget() {
     if (widget.pageReportMode.showStackTrace) {
@@ -171,10 +150,8 @@ class PageWidgetState extends State<PageWidget> {
         child: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: items.length,
-          itemBuilder: (context, index) => Text(
-            items[index],
-            style: _getTextStyle(10),
-          ),
+          itemBuilder: (context, index) =>
+              Text(items[index], style: _getTextStyle(10)),
         ),
       );
     } else {

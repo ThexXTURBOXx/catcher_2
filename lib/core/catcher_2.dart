@@ -31,9 +31,9 @@ class Catcher2 implements ReportModeAction {
     this.ensureInitialized = false,
     GlobalKey<NavigatorState>? navigatorKey,
   }) : assert(
-          rootWidget != null || runAppFunction != null,
-          'You need to provide rootWidget or runAppFunction',
-        ) {
+         rootWidget != null || runAppFunction != null,
+         'You need to provide rootWidget or runAppFunction',
+       ) {
     _configure(navigatorKey);
   }
 
@@ -145,20 +145,16 @@ class Catcher2 implements ReportModeAction {
 
   void _setupReportModeActionInReportMode() {
     _currentConfig.reportMode.reportModeAction = this;
-    _currentConfig.explicitExceptionReportModesMap.forEach(
-      (error, reportMode) {
-        reportMode.reportModeAction = this;
-      },
-    );
+    _currentConfig.explicitExceptionReportModesMap.forEach((error, reportMode) {
+      reportMode.reportModeAction = this;
+    });
   }
 
   void _setupLocalizationsOptionsInReportMode() {
     _currentConfig.reportMode.localizationOptions = _localizationOptions;
-    _currentConfig.explicitExceptionReportModesMap.forEach(
-      (error, reportMode) {
-        reportMode.localizationOptions = _localizationOptions;
-      },
-    );
+    _currentConfig.explicitExceptionReportModesMap.forEach((error, reportMode) {
+      reportMode.localizationOptions = _localizationOptions;
+    });
   }
 
   void _setupLocalizationsOptionsInReportsHandler() {
@@ -422,8 +418,9 @@ class Catcher2 implements ReportModeAction {
       _applicationParameters['buildNumber'] = packageInfo.buildNumber;
       _applicationParameters['packageName'] = packageInfo.packageName;
     } catch (exception) {
-      _logger
-          .warning("Couldn't load application info due to error: $exception");
+      _logger.warning(
+        "Couldn't load application info due to error: $exception",
+      );
     }
   }
 
@@ -446,8 +443,9 @@ class Catcher2 implements ReportModeAction {
       }
     }
 
-    _localizationOptions ??=
-        _getDefaultLocalizationOptionsForLanguage(locale.languageCode);
+    _localizationOptions ??= _getDefaultLocalizationOptionsForLanguage(
+      locale.languageCode,
+    );
     _setupLocalizationsOptionsInReportMode();
     _setupLocalizationsOptionsInReportsHandler();
   }
@@ -631,8 +629,9 @@ class Catcher2 implements ReportModeAction {
 
   @override
   void onActionConfirmed(Report report) {
-    final reportHandler =
-        _getReportHandlerFromExplicitExceptionHandlerMap(report.error);
+    final reportHandler = _getReportHandlerFromExplicitExceptionHandlerMap(
+      report.error,
+    );
     if (reportHandler != null) {
       _logger.info('Using explicit report handler');
       _handleReport(report, reportHandler);
@@ -646,8 +645,10 @@ class Catcher2 implements ReportModeAction {
 
   void _handleReport(Report report, ReportHandler reportHandler) {
     if (!isReportHandlerSupportedInPlatform(report, reportHandler)) {
-      _logger.warning('$reportHandler in not supported for '
-          '${report.platformType.name} platform');
+      _logger.warning(
+        '$reportHandler in not supported for '
+        '${report.platformType.name} platform',
+      );
       return;
     }
 
@@ -659,24 +660,28 @@ class Catcher2 implements ReportModeAction {
       return;
     }
 
-    reportHandler.handle(report, _getContext()).catchError((handlerError) {
-      _logger.warning('Error occurred in $reportHandler: $handlerError');
-      return true; // Shut up warnings
-    }).then((result) {
-      if (result) {
-        _logger.info('$reportHandler successfully reported an error');
-        _cachedReports.remove(report);
-      } else {
-        _logger.warning('$reportHandler failed to report an error');
-      }
-    }).timeout(
-      Duration(milliseconds: _currentConfig.handlerTimeout),
-      onTimeout: () {
-        _logger.warning(
-          '$reportHandler failed to report an error because of timeout',
+    reportHandler
+        .handle(report, _getContext())
+        .catchError((handlerError) {
+          _logger.warning('Error occurred in $reportHandler: $handlerError');
+          return true; // Shut up warnings
+        })
+        .then((result) {
+          if (result) {
+            _logger.info('$reportHandler successfully reported an error');
+            _cachedReports.remove(report);
+          } else {
+            _logger.warning('$reportHandler failed to report an error');
+          }
+        })
+        .timeout(
+          Duration(milliseconds: _currentConfig.handlerTimeout),
+          onTimeout: () {
+            _logger.warning(
+              '$reportHandler failed to report an error because of timeout',
+            );
+          },
         );
-      },
-    );
   }
 
   /// Checks is report handler is supported in given platform. Only supported
@@ -696,8 +701,8 @@ class Catcher2 implements ReportModeAction {
     _currentConfig.handlers
         .where((handler) => handler.shouldHandleWhenRejected())
         .forEach((handler) {
-      _handleReport(report, handler);
-    });
+          _handleReport(report, handler);
+        });
 
     _cachedReports.remove(report);
   }
@@ -720,16 +725,16 @@ class Catcher2 implements ReportModeAction {
     String title = 'An application error has occurred',
     String description =
         'There was unexpected situation in application. Application has been '
-            'able to recover from error state.',
+        'able to recover from error state.',
     double maxWidthForSmallMode = 150,
   }) {
     ErrorWidget.builder = (details) => Catcher2ErrorWidget(
-          details: details,
-          showStacktrace: showStacktrace,
-          title: title,
-          description: description,
-          maxWidthForSmallMode: maxWidthForSmallMode,
-        );
+      details: details,
+      showStacktrace: showStacktrace,
+      title: title,
+      description: description,
+      maxWidthForSmallMode: maxWidthForSmallMode,
+    );
   }
 
   /// Get platform type based on device.
@@ -761,8 +766,9 @@ class Catcher2 implements ReportModeAction {
     final occurrenceTimeout = _currentConfig.reportOccurrenceTimeout;
     final nowDateTime = DateTime.now();
     _reportsOccurrenceMap.removeWhere((key, value) {
-      final occurrenceWithTimeout =
-          key.add(Duration(milliseconds: occurrenceTimeout));
+      final occurrenceWithTimeout = key.add(
+        Duration(milliseconds: occurrenceTimeout),
+      );
       return nowDateTime.isAfter(occurrenceWithTimeout);
     });
   }

@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:dio/dio.dart';
 
 class Catcher2Utils {
   static bool isCupertinoAppAncestor(BuildContext context) =>

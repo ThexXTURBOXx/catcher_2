@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:catcher_2/core/catcher_2_platform_interface.dart';
 import 'package:catcher_2/utils/catcher_2_logger.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/rendering.dart';
@@ -29,7 +30,7 @@ class Catcher2ScreenshotManager {
       final content = await _capture(pixelRatio: pixelRatio, delay: delay);
 
       if (content != null) {
-        return await saveFile(content);
+        return await saveScreenshotFile(content);
       }
     } catch (exception) {
       _logger.warning('Failed to create screenshot file: $exception');
@@ -37,14 +38,13 @@ class Catcher2ScreenshotManager {
     return null;
   }
 
-  Future<XFile> saveFile(Uint8List fileContent) async {
+  Future<XFile> saveScreenshotFile(Uint8List fileContent) async {
     final name = 'catcher_2_${DateTime.now().microsecondsSinceEpoch}.png';
-    final path = (_path?.isEmpty ?? true) ? name : '$_path/$name';
-    final file = XFile.fromData(fileContent, path: path, name: name);
-    if (_path != null && _path!.isNotEmpty) {
-      await file.saveTo(path);
-    }
-    return file;
+    return Catcher2PlatformInterface.instance.saveFile(
+      fileContent: fileContent,
+      fileName: name,
+      customPath: _path,
+    );
   }
 
   Future<Uint8List?> _capture({

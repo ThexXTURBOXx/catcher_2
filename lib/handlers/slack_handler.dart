@@ -51,8 +51,6 @@ class SlackHandler extends ReportHandler {
         message = _buildMessage(report);
       }
 
-      final screenshot = report.screenshot;
-
       final data = <String, dynamic>{
         'text': message,
         'channel': channel,
@@ -61,6 +59,7 @@ class SlackHandler extends ReportHandler {
       };
       _printLog('Sending request to Slack server...');
 
+      final screenshot = report.screenshot;
       if (screenshot != null) {
         data.addAll(await _tryUploadScreenshot(screenshot: screenshot));
       }
@@ -95,7 +94,7 @@ class SlackHandler extends ReportHandler {
     }
 
     try {
-      final name = screenshot.name;
+      final name = await screenshot.name();
 
       final formData = FormData.fromMap(<String, dynamic>{
         'token': apiToken,
@@ -124,7 +123,7 @@ class SlackHandler extends ReportHandler {
         'token': apiToken,
         'file': MultipartFile.fromBytes(
           await screenshot.readAsBytes(),
-          filename: screenshot.name,
+          filename: await screenshot.name(),
         ),
       });
       final responseFilePost = await _dio.post<dynamic>(

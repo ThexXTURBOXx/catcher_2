@@ -51,8 +51,9 @@ class EmailAutoHandler extends BaseEmailHandler {
         ..subject = getEmailTitle(report)
         ..text = setupRawMessageText(report);
 
-      if (report.screenshot != null) {
-        message.attachments = [XFilePngAttachment(report.screenshot!)];
+      XFile? screenshot = report.screenshot;
+      if (screenshot != null) {
+        message.attachments = [XFilePngAttachment(screenshot)];
       }
 
       if (sendHtml) {

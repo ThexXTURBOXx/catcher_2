@@ -4,6 +4,7 @@ import 'package:catcher_2/model/http_request_type.dart';
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
 import 'package:catcher_2/model/report_handler.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -62,12 +63,13 @@ class HttpHandler extends ReportHandler {
 
       Response<dynamic>? response;
       _printLog('Calling: $endpointUri');
-      if (report.screenshot != null) {
+      XFile? screenshot = report.screenshot;
+      if (screenshot != null) {
         final formData = FormData.fromMap(<String, dynamic>{
           'payload_json': json,
           'file': MultipartFile.fromBytes(
-            await report.screenshot!.readAsBytes(),
-            filename: report.screenshot!.name,
+            await screenshot.readAsBytes(),
+            filename: await screenshot.name(),
           ),
         });
         response = await _dio.post<dynamic>(

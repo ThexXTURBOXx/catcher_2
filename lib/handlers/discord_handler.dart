@@ -118,7 +118,7 @@ class DiscordHandler extends ReportHandler {
         data.addAll({
           'file': MultipartFile.fromBytes(
             await screenshot.readAsBytes(),
-            filename: screenshot.name,
+            filename: await screenshot.name(),
           ),
         });
       }

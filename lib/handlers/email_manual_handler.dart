@@ -1,6 +1,7 @@
 import 'package:catcher_2/handlers/base_email_handler.dart';
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -26,12 +27,18 @@ class EmailManualHandler extends BaseEmailHandler {
 
   Future<bool> _sendEmail(Report report) async {
     try {
+      final attachments = <String>[];
+      XFile? screenshot = report.screenshot;
+      if (screenshot != null && screenshot is FileSystemXFile) {
+        attachments.add(screenshot.path);
+      }
+
       final mailOptions = MailOptions(
         body: _getEmailBody(report),
         subject: getEmailTitle(report),
         recipients: recipients,
         isHTML: sendHtml,
-        attachments: [report.screenshot?.path ?? ''],
+        attachments: attachments,
       );
       _printLog('Creating mail request');
       await FlutterMailer.send(mailOptions);

@@ -1,6 +1,7 @@
 import 'package:catcher_2/model/platform_type.dart';
 import 'package:catcher_2/model/report.dart';
 import 'package:catcher_2/model/report_handler.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:sentry/sentry.dart';
@@ -73,8 +74,9 @@ class SentryHandler extends ReportHandler {
       // either because we do not have access to the file system in web.
       SentryAttachment? screenshotAttachment;
       try {
-        if (report.screenshot != null && !kIsWeb) {
-          final bytes = await report.screenshot!.readAsBytes();
+        XFile? screenshot = report.screenshot;
+        if (screenshot != null && !kIsWeb) {
+          final bytes = await screenshot.readAsBytes();
           screenshotAttachment = SentryAttachment.fromScreenshotData(bytes);
           _printLog('Created screenshot attachment');
         }

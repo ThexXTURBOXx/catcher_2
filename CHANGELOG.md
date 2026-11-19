@@ -1,3 +1,6 @@
+## 3.0.0
+* Bump to next stable version
+
 ## 3.0.0-alpha.1
 * [BREAKING_CHANGE] `material_ui` and `cupertino_ui` enforce newer SDKs. Only Flutter `>=3.47.0` and SDK `>=3.13.0` is supported now
 * [BREAKING_CHANGE] Update to `cross_file` versions `0.4.x`

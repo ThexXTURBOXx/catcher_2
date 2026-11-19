@@ -16,19 +16,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  catcher_2:
-    # When depending on this package from a real application you should use:
-    #   catcher_2: ^x.y.z
-    # See https://dart.dev/tools/pub/dependencies#version-constraints
-    # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version.
-    path: ../
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  catcher_2: ^3.0.0
   cupertino_icons: ^2.0.0
-
   cupertino_ui: ^1.1.1
   dio: ^5.0.1
   flutter_local_notifications: ^22.0.0
@@ -51,6 +40,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+
+dependency_overrides:
+  catcher_2:
+    path: ..
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

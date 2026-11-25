@@ -101,6 +101,48 @@ If you are upgrading from `3.x` to `4.x`:
        catcher_2_all: ^1.0.0-alpha.0
      ```
 
+Additionally, the localization system was overhauled to integrate with Flutter's standard `LocalizationsDelegate` architecture (`Catcher2LocalizationDelegate` and `Catcher2Localizations`).
+
+If you are upgrading from the legacy localization system:
+
+1. **Remove `localizationOptions` from `Catcher2Options`**: The `localizationOptions` parameter in `Catcher2Options` and the old `LocalizationOptions` class have been removed.
+2. **Add `Catcher2LocalizationDelegate` to your `MaterialApp` / `CupertinoApp`**:
+   Add `Catcher2LocalizationDelegate` to your `localizationsDelegates`. Catcher 2 provides built-in localization support for 15 languages out-of-the-box.
+3. **Override or Customize Localizations**:
+   Use the `overrides` callback on `Catcher2LocalizationDelegate` along with `Catcher2Localizations.construct<Language>().copyWith(...)` to customize strings or add new languages.
+
+**Migration Example:**
+- **Before (`3.x`)**:
+  ```dart
+  Catcher2Options debugOptions = Catcher2Options(
+    DialogReportMode(),
+    [ConsoleHandler()],
+    localizationOptions: [
+      LocalizationOptions("pl", dialogReportModeTitle: "Błąd aplikacji"),
+    ],
+  );
+  ```
+- **After (`4.x`)**:
+  ```dart
+  MaterialApp(
+    navigatorKey: Catcher2.navigatorKey,
+    localizationsDelegates: [
+      Catcher2LocalizationDelegate(
+        overrides: (locale) {
+          return switch ((locale.languageCode, locale.countryCode?.toUpperCase())) {
+            ('pl', _) => Catcher2Localizations.constructPolish().copyWith(
+              dialogReportModeTitle: 'Błąd aplikacji',
+            ),
+            _ => null,
+          };
+        },
+      ),
+    ] + GlobalMaterialLocalizations.delegates,
+    supportedLocales: const [Locale('en', 'US'), Locale('pl', 'PL')],
+    home: MyApp(),
+  );
+  ```
+
 ## Table of contents
 [Platform support](#platform-support)   
 [Basic example](#basic-example)  
@@ -367,196 +409,109 @@ try {
 ```
 
 ### Localization
-Catcher 2 allows to create localizations for Report modes. To add localization support, you need setup
-few things:
+Catcher 2 supports internationalization (i18n) via Flutter's standard `LocalizationsDelegate` system (`Catcher2LocalizationDelegate` and `Catcher2Localizations`).
 
-Add navigatorKey in your `MaterialApp`:
-```dart
- navigatorKey: Catcher2.navigatorKey,
-```
+To add localization support to your application:
 
-Add Flutter localizations delegates and locales in your MaterialApp:
-```dart
- localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', 'US'),
-        const Locale('pl', 'PL'),
-      ],
-```
+1. Add `navigatorKey: Catcher2.navigatorKey` to your `MaterialApp` / `CupertinoApp`.
+2. Add `Catcher2LocalizationDelegate` to your `localizationsDelegates` along with Flutter's localizations delegates.
+3. Configure `supportedLocales`.
 
-Add localizationOptions in `Catcher2Options`:
+#### Built-in Language Support
+Catcher 2 comes with built-in localization support for [15 languages](https://github.com/ThexXTURBOXx/catcher_2/blob/master/catcher_2/lib/src/model/catcher_2_i18n.dart).
+
+#### Customizing and Overriding Translations
+You can use the `overrides` callback in `Catcher2LocalizationDelegate` to customize built-in localizations or add new languages using `.copyWith()`:
+
 ```dart
-Catcher2Options(
-...
-    localizationOptions: [
-        LocalizationOptions("pl", notificationReportModeTitle: "My translation" ...),
-        LocalizationOptions("de", notificationReportModeTitle: "My translation" ...),
-    ]
+Catcher2LocalizationDelegate(
+  overrides: (locale) {
+    return switch ((locale.languageCode, locale.countryCode?.toUpperCase())) {
+      ('en', _) => Catcher2Localizations(
+        dialogReportModeTitle: 'Custom message',
+        dialogReportModeAccept: 'YES',
+        dialogReportModeCancel: 'NO',
+      ),
+      ('pl', _) => Catcher2Localizations.constructPolish().copyWith(
+        dialogReportModeTitle: 'Błąd aplikacji',
+        dialogReportModeAccept: 'Akceptuj',
+        dialogReportModeCancel: 'Odrzuć',
+      ),
+      _ => null,
+    };
+  },
 )
 ```
 
-You can add translate for given parameters:
-* notificationReportModeTitle - notification report mode title
-* notificationReportModeContent - notification report mode subtitle
-* dialogReportModeTitle - dialog report mode title
-* dialogReportModeDescription - dialog report mode description
-* dialogReportModeAccept - dialog report mode accept button
-* dialogReportModeCancel - dialog report mode cancel button
-* pageReportModeTitle - page report mode toolbar title
-* pageReportModeDescription - page report mode description
-* pageReportModeAccept - page report mode accept button
-* pageReportModeCancel - page report mode cancel button
-* toastHandlerDescription - toast handler message
-
-
-If you want to override default English texts, just simply add localization options for "en" language.
-
-There are build in support for languages:
-* english
+#### Complete Localization Example
 ```dart
-LocalizationOptions.buildDefaultEnglishOptions();
-```
-* chinese
-```dart
-LocalizationOptions.buildDefaultChineseOptions();
-```
-* hindi
-```dart
-LocalizationOptions.buildDefaultHindiOptions();
-```
-* spanish
-```dart
-LocalizationOptions.buildDefaultSpanishOptions();
-```
-* malay
-```dart
-LocalizationOptions.buildDefaultMalayOptions();
-```
-* russian
-```dart
-LocalizationOptions.buildDefaultRussianOptions();
-```
-* portuguese
-```dart
-LocalizationOptions.buildDefaultPortugueseOptions();
-```
-* french
-```dart
-LocalizationOptions.buildDefaultFrenchOptions();
-```
-* polish
-```dart
-LocalizationOptions.buildDefaultPolishOptions();
-```
-* italian
-```dart
-LocalizationOptions.buildDefaultItalianOptions();
-```
-* korean
-```dart
-LocalizationOptions.buildDefaultKoreanOptions();
-```
-* german
-```dart
-LocalizationOptions.buildDefaultGermanOptions();
-```
-* dutch
-```dart
-LocalizationOptions.buildDefaultDutchOptions();
-```
-* arabic
-```dart
-LocalizationOptions.buildDefaultArabicOptions();
-```
-* turkish
-```dart
-LocalizationOptions.buildDefaultTurkishOptions();
-```
-
-Complete Example:
-```dart
-import 'package:material_ui/material_ui.dart';
 import 'package:catcher_2/catcher_2.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:catcher_2_mail_manual/catcher_2_mail_manual.dart';
+import 'package:material_ui/material_ui.dart';
 
-main() {
-  Catcher2Options debugOptions = Catcher2Options(DialogReportMode(), [
+void main() {
+  final debugOptions = Catcher2Options(DialogReportMode(), [
     ConsoleHandler(),
-    HttpHandler(HttpRequestType.post, Uri.parse("https://httpstat.us/200"),
-        printLogs: true)
-  ], localizationOptions: [
-    LocalizationOptions("pl",
-        notificationReportModeTitle: "Wystąpił błąd aplikacji",
-        notificationReportModeContent:
-            "Naciśnij tutaj aby wysłać raport do zespołu wpsarcia",
-        dialogReportModeTitle: "Błąd aplikacji",
-        dialogReportModeDescription:
-            "Wystąpił niespodziewany błąd aplikacji. Raport z błędem jest gotowy do wysłania do zespołu wsparcia. Naciśnij akceptuj aby wysłać raport lub odrzuć aby odrzucić raport.",
-        dialogReportModeAccept: "Akceptuj",
-        dialogReportModeCancel: "Odrzuć",
-        pageReportModeTitle: "Błąd aplikacji",
-        pageReportModeDescription:
-            "Wystąpił niespodziewany błąd aplikacji. Raport z błędem jest gotowy do wysłania do zespołu wsparcia. Naciśnij akceptuj aby wysłać raport lub odrzuć aby odrzucić raport.",
-        pageReportModeAccept: "Akceptuj",
-        pageReportModeCancel: "Odrzuć",
-        toastHandlerDescription: "Wystąpił błąd:",
-    ) 
   ]);
-  Catcher2Options releaseOptions = Catcher2Options(NotificationReportMode(), [
-    EmailManualHandler(["recipient@email.com"])
+  final releaseOptions = Catcher2Options(PageReportMode(), [
+    EmailManualHandler(['recipient@email.com']),
   ]);
 
-  Catcher2(rootWidget: MyApp(), debugConfig: debugOptions, releaseConfig: releaseOptions);
+  Catcher2(
+    rootWidget: const MyApp(),
+    debugConfig: debugOptions,
+    releaseConfig: releaseOptions,
+  );
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: Catcher2.navigatorKey,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', 'US'),
-        const Locale('pl', 'PL'),
-      ],
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Plugin example app'),
+  Widget build(BuildContext context) => MaterialApp(
+    navigatorKey: Catcher2.navigatorKey,
+    localizationsDelegates:
+        <LocalizationsDelegate>[
+          Catcher2LocalizationDelegate(
+            overrides: (locale) {
+              return switch ((locale.languageCode, locale.countryCode?.toUpperCase())) {
+                ('pl', _) => Catcher2Localizations.constructPolish().copyWith(
+                  dialogReportModeTitle: 'Błąd aplikacji',
+                  dialogReportModeDescription:
+                      'Wystąpił niespodziewany błąd aplikacji.',
+                  dialogReportModeAccept: 'Akceptuj',
+                  dialogReportModeCancel: 'Odrzuć',
+                ),
+                _ => null,
+              };
+            },
           ),
-          body: ChildWidget()),
-    );
-  }
+        ] +
+        GlobalMaterialLocalizations.delegates,
+    supportedLocales: const [Locale('en', 'US'), Locale('pl', 'PL')],
+    home: Scaffold(
+      appBar: AppBar(title: const Text('Plugin example app')),
+      body: const ChildWidget(),
+    ),
+  );
 }
 
 class ChildWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: TextButton(
-            child: Text("Generate error"), onPressed: () => generateError()));
-  }
+  const ChildWidget({super.key});
 
-  generateError() async {
-    throw "Test exception";
+  @override
+  Widget build(BuildContext context) =>
+      TextButton(onPressed: generateError, child: const Text('Generate error'));
+
+  Future<void> generateError() async {
+    throw Exception('Test exception');
   }
 }
-
 ```
 
 ### Report modes

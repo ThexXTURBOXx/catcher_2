@@ -1,5 +1,8 @@
 ## 4.0.0-alpha.0
-* [BREAKING_CHANGE] Refactor handlers out of main package to be able to exclude packages from the final executable
+* [BREAKING_CHANGE] Refactor handlers out of main package to be able to exclude packages from the final executable - **either migrate directly to the multi-package structure or use the [catcher_2_all](https://pub.dev/packages/catcher_2_all) package.**
+* [BREAKING_CHANGE] Completely reworked localization system
+* [BREAKING_CHANGE] New `lib/src` structure
+* Added migration guide to README
 
 ## 3.0.0
 * Bump to next stable version

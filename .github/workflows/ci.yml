@@ -1,13 +1,17 @@
-name: CI
+name: CI/CD
 
 on:
   push:
+    branches: [ "**" ]
+    tags:
+      - '*'
   pull_request:
+    branches: [ "**" ]
   workflow_dispatch:
 
 jobs:
-  lint:
-    name: Lint
+  ci:
+    name: CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,18 +21,49 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
 
-      - name: Setup Pana
-        run: flutter pub global activate pana
+      - name: Install melos and initialize workspace
+        uses: bluefireteam/melos-action@v3
 
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Lint
+      - name: Format Check
         run: dart format -o none --set-exit-if-changed .
 
       - name: Analyze
         run: flutter analyze
 
-      - name: Pana
-        run: pana
+  #      - name: Pana Workspace
+  #        uses: bluefireteam/pana_workspace@v0
+
+  cd:
+    name: CD
+    needs: ci
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install melos and initialize workspace
+        uses: bluefireteam/melos-action@v3
+
+      - name: Setup Pub Credentials
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
+        run: |
+          if [ -n "$PUB_CREDENTIALS" ]; then
+            mkdir -p ~/.config/dart
+            echo "$PUB_CREDENTIALS" > ~/.config/dart/pub-credentials.json
+          else
+            echo "PUB_CREDENTIALS secret is not set. Skipping publishing."
+            exit 1
+          fi
+
+      - name: Publish with Melos
+        run: melos publish --no-dry-run --yes

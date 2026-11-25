@@ -1,59 +1,20 @@
-name: catcher_2
-description: Plugin for error catching which provides multiple handlers for dealing with errors when they are not caught by the developer.
-version: 3.0.0
-homepage: https://github.com/ThexXTURBOXx/catcher_2
-repository: https://github.com/ThexXTURBOXx/catcher_2
-issue_tracker: https://github.com/ThexXTURBOXx/catcher_2/issues
+name: catcher_2_root
 
-funding:
-  - https://github.com/sponsors/ThexXTURBOXx
-
-screenshots:
-  - description: 'The catcher_2 logo'
-    path: screenshots/logo.png
-  - description: 'catcher_2 in action with notifications'
-    path: screenshots/1.png
-  - description: 'catcher_2 in action with emails'
-    path: screenshots/3.png
-  - description: 'catcher_2 in action with dialogs'
-    path: screenshots/6.png
-
-topics:
-  - analysis
-  - errors
-  - flutter
-  - logging
-  - tool
+publish_to: none
 
 environment:
-  sdk: '>=3.13.0 <4.0.0'
-  flutter: ">=3.47.0"
+  sdk: ^3.13.0
 
-dependencies:
-  cross_file: ^0.4.0
-  cross_file_web: ^1.0.0
-  cupertino_ui: ^1.1.1
-  device_info_plus: '>=9.0.0 <14.0.0'
-  dio: ^5.0.1
-  flutter:
-    sdk: flutter
-  flutter_mailer: ^3.0.0
-  fluttertoast: '>=8.2.6 <11.0.0'
-  logging: ^1.0.2
-  mailer: '>=6.0.0 <8.0.0'
-  material_ui: ^1.4.0
-  package_info_plus: '>=4.0.0 <11.0.0'
-  sentry: '>=7.2.0 <11.0.0'
-  universal_io: ^2.0.4
-  web: ^1.0.0
+workspace:
+  - catcher_2
+  - catcher_2/example
+  - catcher_2_mail_auto
+  - catcher_2_mail_base
+  - catcher_2_mail_manual
+  - catcher_2_sentry
+  - catcher_2_toast
+  - catcher_2_all
 
 dev_dependencies:
   flutter_lints: ^6.0.0
-
-platforms:
-  android:
-  ios:
-  linux:
-  macos:
-  web:
-  windows:
+  melos: ^8.10.0

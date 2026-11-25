@@ -1,0 +1,37 @@
+name: catcher_2_sentry
+description: Handler for catcher_2 providing support for reporting to Sentry.
+version: 1.0.0-alpha.0
+resolution: workspace
+homepage: https://github.com/ThexXTURBOXx/catcher_2
+repository: https://github.com/ThexXTURBOXx/catcher_2
+issue_tracker: https://github.com/ThexXTURBOXx/catcher_2/issues
+
+funding:
+  - https://github.com/sponsors/ThexXTURBOXx
+
+topics:
+  - analysis
+  - errors
+  - flutter
+  - logging
+  - tool
+
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+  flutter: ">=3.47.0"
+
+dependencies:
+  catcher_2: ^4.0.0-alpha.0
+  cross_file: ^0.4.0
+  flutter:
+    sdk: flutter
+  material_ui: ^1.4.0
+  sentry: '>=7.2.0 <11.0.0'
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
